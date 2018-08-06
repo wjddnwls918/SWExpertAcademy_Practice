@@ -7,12 +7,24 @@ public class Pro_1961 {
 		Scanner in = new Scanner(System.in);
 		
 		int t = in.nextInt();
-		int n;
+		int n=0;
 		int map[][];
-		for(int i=1; i<=t; i++)
+		for(int x=1; x<=t; x++)
 		{
 			n = in.nextInt();
+			
+			map = new int[n][n];
+			for(int i=0; i<n; i++)
+			{
+				for(int j=0; j<n; j++)
+				{
+					map[i][j] = in.nextInt();
+				}
+			}
+			
 		}
+		
+		
 	}
 
 }

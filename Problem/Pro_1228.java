@@ -1,73 +1,64 @@
+import java.awt.PageAttributes.OriginType;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.lang.reflect.Array;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class Pro_1228 {
 
-		static int start,cnt;
-	
-	public static void main(String[] args) {
+		static int N;
+		static String originStr[];
+		static int numOfCmd;
+		
+		static Queue<String> que;
+		
+	public static void main(String[] args) throws Exception{
 		// TODO Auto-generated method stub
-		Scanner in = new Scanner(System.in);
-		
-		String n;
-		String real;
-		String numOp;
-		String cmd;
-		String realnum[];
-		String cmdlist[];
-		
-		for(int i =1; i<=10; i++)
+	
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		for(int x =1; x<=10; x++)
 		{
-			n = in.nextLine();						
-			real = in.nextLine();		
-			//System.out.println(real);
+			que = new ArrayDeque<>();
 			
-			realnum = new String[20];
-			realnum = real.split(" ");		
-			
-			
-			
-			numOp = in.nextLine();		
-			cmd = in.nextLine();			
-				
-			cmdlist = cmd.split(" ");			
-			
-			/*for(int j =0; j<realnum.length; j++)
-				System.out.println(realnum[j]);
-			*/
-			for(int j = 0; j<cmdlist.length; j++)
-			{
-				//System.out.println(cmdlist[j]);
-				
-				if(cmdlist[j] == "I")
-				{
-					start = Integer.parseInt(cmdlist[j+1]);
-					cnt = Integer.parseInt(cmdlist[j+2]);
-				
-					j = j+3;
-					
-					for(int k = start; k<start+cnt; k++)
-					{
-						realnum[k] = cmdlist[j];
-						j++;
-					}				
-				
-				}
-				
-				
+			N = Integer.parseInt(in.readLine());
+			originStr = new String[N];
+			String temp[];
+			temp = in.readLine().split(" ");
+			for(int i=0; i<temp.length; i++) {
+				originStr[i] = temp[i];
 			}
 			
+			numOfCmd = Integer.parseInt(in.readLine());
+			temp = in.readLine().split(" ");
+		
 			
-
-			System.out.println("#"+i);
-			for(int j=0; j<10; j++)
-			{
-				System.out.print(realnum[j]);
-				if(j == 9)
-				{
-					System.out.println();
+			
+			
+			/*	for(int i=0; i<temp.length; i++) {
+				if( temp[i].equals("I")) {
+					int idx = Integer.parseInt(temp[i+1]);
+					int cnt = Integer.parseInt(temp[i+2]);
+				
+					i = i+3;					
+					for(int j=0; j<cnt; j++) {
+						if(idx+j >= originStr.length)
+							break;
+						originStr[idx+j] = temp[i+j]; 
+					}
+					i = i+cnt-1;
+					
 				}
+			}
+		*/
+			System.out.print("#"+x+" ");
+			for(int i=0; i<10; i++) {
+				if(i == 9)
+					System.out.println(originStr[i]);
 				else
-					System.out.print(" ");
+					System.out.print(originStr[i]+" ");
 			}
 			
 		}

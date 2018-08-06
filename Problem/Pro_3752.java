@@ -1,101 +1,87 @@
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.HashSet;
 
 public class Pro_3752 {
 
-	static int n;
-	static int cnt;
-	static int score[];
-	static int total[];
-	static int visit[];	
-	static int sum;
-
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception{
 		// TODO Auto-generated method stub
-		Scanner in = new Scanner(System.in);		
-		int t = in.nextInt();
-	
-		
-		for(int i =1; i<=2; i++)
-		{
-			n = in.nextInt();
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		int T = Integer.parseInt(in.readLine());
+		for(int x=1; x<=T; x++) {
 			
-			score = new int[n];
-			visit = new int[n];
+			HashSet<Integer> answer = new HashSet();
+			HashSet<Integer> temp = new HashSet();
 			
-			for(int j = 0; j<score.length; j++)
-			{
-				score[j] = in.nextInt();
-			}
-		
-			total = new int [10000];		
-		
-			cnt=0;
-			
-			sum = 0;			
-			dfs(0,0);
-			sum = 0;
-			dfs(0,1);
-			
-			
-			for(int j=0; j<total.length; j++)
-			{				
-				if(total[j] == 1)
-				{
-					cnt++;					
+			int N = Integer.parseInt(in.readLine());
+			answer.add(0);
+			String tem[];
+			tem = in.readLine().split(" ");
+			for(int i=0; i<N; i++) {
+				int add = Integer.parseInt(tem[i]);
+				for(int ans: answer) {
+					temp.add(ans+add);
 				}
+				for(int t : temp) {
+					answer.add(t);
+				}			
 			}
 			
-			System.out.println("#"+i + " "+ cnt);
-		}
-		
-		
+			System.out.println("#"+x+" "+answer.size());
+			
+		}	
 		
 	}
-	
-	public static void dfs(int depth, int flag)
-	{		
-		if(flag == 1)
-		{
-			//visit[depth] = 1;
-			sum += score[depth];
-		}
-		else
-		{
-			visit[depth] = 0;
-		}
-		
-		
-		if(depth == n-1)
-		{
-			int temp = 0 ;
-			/*	for(int i = 0; i<visit.length; i++)
-			{
-				
-				if( visit[i] == 1)
-					temp += score[i]; 
-			}			
-			*/
-			//total[temp] = 1;		
-			total [sum] = 1;
-			//sum = 0 ;
-			
-		}
-		else
-		{		
-			
-			dfs(depth+1,0);			
-			
-			
-			dfs(depth+1,1);		
-		}
-		
-		
-		sum = 0;
-	
-	}
-	
-
 
 }
+
+/*
+import java.util.Scanner;
+ 
+public class Solution {
+    public static int answer;
+    public static boolean bt[][];
+     
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N, T = sc.nextInt();
+        for (int t = 1; t <= T; t++) {
+            // solve
+            answer = 0;
+            N = sc.nextInt();
+            int score[] = new int[N];
+            int max_score = 0;
+            for (int i = 0; i < N; i++) {
+                score[i] = sc.nextInt();
+                max_score += score[i];
+            }
+            bt = new boolean[max_score+1][N];
+            boolean flag_score[] = new boolean[max_score+1];
+            solve(bt, score, 0, 0, N, flag_score);
+             
+            // print
+            System.out.print("#"+t+" "+answer);
+            if (t < T) System.out.println();
+        }
+        sc.close();
+    }
+     
+    public static void solve(boolean bt[][], int score[], int cur_score, int idx, int N, boolean flag_score[]) {
+        if (idx == N) {
+            if (!flag_score[cur_score]) {
+                flag_score[cur_score] = true;
+                answer++;
+            }
+            return;
+        }
+        if (!bt[cur_score][idx]) {
+            bt[cur_score][idx] = true;
+            solve(bt, score, cur_score, idx+1, N, flag_score);
+            solve(bt, score, cur_score+score[idx], idx+1, N, flag_score);
+        }
+    }
+}
+
+다른 풀이법
+
+*/
